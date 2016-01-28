@@ -1,8 +1,29 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueAsyncData from 'vue-async-data'
+import VueResource from 'vue-resource'
+
+Vue.use(VueRouter)
+Vue.use(VueAsyncData)
+Vue.use(VueResource)
+
 import App from './App'
+import Home from './app/content/Home'
+import './app/content/ButtonPage'
 
 /* eslint-disable no-new */
-new Vue({
-  el: 'body',
+var AppWrapper = Vue.extend({
   components: { App }
 })
+
+var router = new VueRouter()
+router.map({
+  '/home': {
+    component: Home
+  },
+  '/button': {
+    component: Vue.component('button-page')
+  }
+})
+
+router.start(AppWrapper, '#app')

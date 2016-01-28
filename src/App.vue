@@ -6,7 +6,7 @@ import MdlLayout from './mdl/Layout'
 
 import AppHeader from './app/Header'
 import AppDrawer from './app/Drawer'
-import ButtonPage from './pages/ButtonPage'
+import AppContent from './app/Content'
 
 export default {
   components: {
@@ -14,7 +14,7 @@ export default {
     MdlLayout,
     AppHeader,
     AppDrawer,
-    ButtonPage
+    AppContent
   }
 }
 </script>

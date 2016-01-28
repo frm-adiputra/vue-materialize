@@ -10,7 +10,8 @@ module.exports = {
     filename: '[name].js'
   },
   externals: {
-    "componentHandler": "componentHandler"
+    "componentHandler": "componentHandler",
+    "hljs": "hljs"
   },
   resolve: {
     extensions: ['', '.js', '.vue'],

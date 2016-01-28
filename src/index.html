@@ -64,8 +64,10 @@
     </style>
 
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
   </head>
-  <body>
+  <body id="app">
     <app></app>
 
     {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}

@@ -1,22 +1,22 @@
-<template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <hello></hello>
-  </div>
-</template>
+<template src="./App.template.html"></template>
 
 <script>
-import Hello from './components/Hello'
+import MdlButton from './mdl/Button'
+import MdlLayout from './mdl/Layout'
+
+import AppHeader from './app/Header'
+import AppDrawer from './app/Drawer'
+import ButtonPage from './pages/ButtonPage'
 
 export default {
   components: {
-    Hello
+    MdlButton,
+    MdlLayout,
+    AppHeader,
+    AppDrawer,
+    ButtonPage
   }
 }
 </script>
 
-<style>
-body {
-  font-family: Helvetica, sans-serif;
-}
-</style>
+<style src="./App.style.css"></style>

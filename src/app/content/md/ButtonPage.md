@@ -253,3 +253,23 @@
   <i class="material-icons">add</i>
 </mdl-button>
 ```
+
+## Props
+- `raised`: Applies _raised_ display effect  
+  Mutually exclusive with _fab_, _mini-fab_, and _icon_
+- `fab`: Applies _fab_ (circular) display effect  
+  Mutually exclusive with _raised_, _mini-fab_, and _icon_
+- `mini-fab`: Applies _mini-fab_ (small fab circular) display effect  
+  Mutually exclusive with _raised_, _fab_, and _icon_
+- `icon`: Applies _icon_ (small plain circular) display effect  
+  Mutually exclusive with _raised_, _fab_, and _mini-fab_
+- `colored`: Applies _colored_ display effect  
+  Colors are defined in `material.min.css`
+- `primary`: Applies _primary_ color display effect  
+  Colors are defined in `material.min.css`
+- `accent`: Applies _accent_ color display effect  
+  Colors are defined in `material.min.css`
+- `ripple`: Applies _ripple_ click effect  
+  May be used in combination with any other classes
+- `disabled`: Disables button  
+  May be used with any button version

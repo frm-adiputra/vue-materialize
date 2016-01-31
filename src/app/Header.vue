@@ -12,9 +12,9 @@
           <label class="mdl-textfield__label" for="search">Enter your query...</label>
         </div>
       </div>
-      <md-button ripple icon id="hdrbtn">
+      <button v-md-button ripple icon id="hdrbtn">
         <i class="material-icons">more_vert</i>
-      </md-button>
+      </button>
       <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
         <li class="mdl-menu__item">About</li>
         <li class="mdl-menu__item">Contact</li>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import MdButton from '../md/Button'
+import '../md/Button'
 import MdLayoutHeader from '../md/layout/Header'
 import MdLayoutHeaderRow from '../md/layout/HeaderRow'
 import MdLayoutTitle from '../md/layout/Title'
@@ -33,7 +33,6 @@ import MdLayoutSpacer from '../md/layout/Spacer'
 
 export default {
   components: {
-    MdButton,
     MdLayoutHeader,
     MdLayoutHeaderRow,
     MdLayoutTitle,

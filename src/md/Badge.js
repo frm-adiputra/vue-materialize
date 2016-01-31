@@ -6,8 +6,6 @@ let OVERLAP_CLASS = 'mdl-badge--overlap'
 
 Vue.directive('md-badge', {
   params: ['no-background', 'overlap'],
-  bind () {
-  },
   update (value) {
     if (!value || value == null) {
       this.el.classList.remove(BADGE_CLASS)

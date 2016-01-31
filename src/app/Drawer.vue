@@ -5,10 +5,10 @@
       <div class="demo-avatar-dropdown">
         <span>hello@example.com</span>
         <div class="mdl-layout-spacer"></div>
-        <md-button id="accbtn" ripple icon>
+        <button v-md-button id="accbtn" ripple icon>
           <i class="material-icons" role="presentation">arrow_drop_down</i>
           <span class="visuallyhidden">Accounts</span>
-        </md-button>
+        </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
           <li class="mdl-menu__item">hello@example.com</li>
           <li class="mdl-menu__item">info@example.com</li>
@@ -20,7 +20,7 @@
       <a class="mdl-navigation__link" v-link="{path: '/home'}">Home</a>
       <a class="mdl-navigation__link" v-link="{path: '/badge'}">Badges</a>
       <a class="mdl-navigation__link" v-link="{path: '/button'}">Buttons</a>
-      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
+      <a class="mdl-navigation__link" v-link="{path: '/card'}">Cards</a>
       <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
       <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
       <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
@@ -33,14 +33,13 @@
 </template>
 
 <script>
-import MdButton from '../md/Button'
+import '../md/Button'
 import MdLayoutDrawer from '../md/layout/Drawer'
 import MdLayoutTitle from '../md/layout/Title'
 import MdLayoutSpacer from '../md/layout/Spacer'
 
 export default {
   components: {
-    MdButton,
     MdLayoutDrawer,
     MdLayoutTitle,
     MdLayoutSpacer

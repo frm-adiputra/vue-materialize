@@ -1,8 +1,8 @@
 <template src="./App.template.html"></template>
 
 <script>
-import MdlButton from './mdl/Button'
-import MdlLayout from './mdl/Layout'
+import MdButton from './md/Button'
+import MdLayout from './md/Layout'
 
 import AppHeader from './app/Header'
 import AppDrawer from './app/Drawer'
@@ -10,8 +10,8 @@ import AppContent from './app/Content'
 
 export default {
   components: {
-    MdlButton,
-    MdlLayout,
+    MdButton,
+    MdLayout,
     AppHeader,
     AppDrawer,
     AppContent

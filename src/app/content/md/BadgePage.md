@@ -7,14 +7,14 @@ Small status descriptors for UI elements.
 ## Binding
 
 <div id="badge-demo-binding">
-  <span class="material-icons" v-mdl-badge="badgeValue">account_box</span>
+  <span class="material-icons" v-md-badge="badgeValue">account_box</span>
   <br />
   <input v-model="badgeValue">
 </div>
 
 ```html
 <div id="app">
-  <span class="material-icons" v-mdl-badge="badgeValue">account_box</span>
+  <span class="material-icons" v-md-badge="badgeValue">account_box</span>
   <input v-model="badgeValue">
 </div>
 
@@ -32,49 +32,49 @@ Small status descriptors for UI elements.
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <span class="material-icons"  v-mdl-badge.literal="1">account_box</span>
+    <span class="material-icons"  v-md-badge.literal="1">account_box</span>
     <p class="mdl-typography--caption-color-contrast">Number</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <span class="material-icons" v-mdl-badge.literal="♥">account_box</span>
+    <span class="material-icons" v-md-badge.literal="♥">account_box</span>
     <p class="mdl-typography--caption-color-contrast">Icon</p>
   </div>
 </div>
 
 ```html
 <!-- Number badge on icon -->
-<span class="material-icons"  v-mdl-badge.literal="1">account_box</span>
+<span class="material-icons"  v-md-badge.literal="1">account_box</span>
 
 <!-- Icon badge on icon -->
-<span class="material-icons" v-mdl-badge.literal="♥">account_box</span>
+<span class="material-icons" v-md-badge.literal="♥">account_box</span>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <span v-mdl-badge.literal="4">Inbox</span>
+    <span v-md-badge.literal="4">Inbox</span>
     <p class="mdl-typography--caption-color-contrast">Number</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <span v-mdl-badge.literal="♥">Mood</span>
+    <span v-md-badge.literal="♥">Mood</span>
     <p class="mdl-typography--caption-color-contrast">Icon</p>
   </div>
 </div>
 
 ```html
 <!-- Number badge -->
-<span v-mdl-badge.literal="4">Inbox</span>
+<span v-md-badge.literal="4">Inbox</span>
 
 <!-- Icon badge -->
-<span v-mdl-badge.literal="♥">Mood</span>
+<span v-md-badge.literal="♥">Mood</span>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <span class="material-icons"  v-mdl-badge.literal="1" no-background>account_box</span>
+    <span class="material-icons"  v-md-badge.literal="1" no-background>account_box</span>
     <p class="mdl-typography--caption-color-contrast">No background</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <span class="material-icons"  v-mdl-badge.literal="1" overlap>account_box</span>
+    <span class="material-icons"  v-md-badge.literal="1" overlap>account_box</span>
     <p class="mdl-typography--caption-color-contrast">Overlap</p>
   </div>
 </div>

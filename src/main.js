@@ -9,6 +9,7 @@ Vue.use(VueResource)
 
 import App from './App'
 import Home from './app/content/Home'
+import './app/content/BadgePage'
 import './app/content/ButtonPage'
 
 /* eslint-disable no-new */
@@ -20,6 +21,9 @@ var router = new VueRouter()
 router.map({
   '/home': {
     component: Home
+  },
+  '/badge': {
+    component: Vue.component('badge-page')
   },
   '/button': {
     component: Vue.component('button-page')

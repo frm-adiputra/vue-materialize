@@ -10,6 +10,9 @@ export default {
 </script>
 
 <style>
+  .demo-page {
+    padding: 16px;
+  }
   .demo-page > pre {
     padding: 16px;
     background-color: rgba(158, 158, 158, 0.2);

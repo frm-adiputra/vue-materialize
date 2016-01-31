@@ -1,3 +1,8 @@
+# BUTTONS
+
+Variations on Material Design buttons.
+
+
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
     <mdl-button fab colored><i class="material-icons">add</i></mdl-button>
@@ -7,8 +12,8 @@
     <mdl-button ripple fab colored><i class="material-icons">add</i></mdl-button>
     <p class="mdl-typography--caption-color-contrast">With ripple</p>
   </div>
-</div>
 
+</div>
 ```html
 <!-- Colored FAB button -->
 <mdl-button fab colored>

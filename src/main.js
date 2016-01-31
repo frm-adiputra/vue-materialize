@@ -11,6 +11,7 @@ import App from './App'
 import Home from './app/content/Home'
 import './app/content/BadgePage'
 import './app/content/ButtonPage'
+import './app/content/ProgressPage'
 
 /* eslint-disable no-new */
 var AppWrapper = Vue.extend({
@@ -27,6 +28,9 @@ router.map({
   },
   '/button': {
     component: Vue.component('button-page')
+  },
+  '/progress': {
+    component: Vue.component('progress-page')
   }
 })
 

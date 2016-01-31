@@ -4,7 +4,7 @@ let BADGE_CLASS = 'mdl-badge'
 let NO_BG_CLASS = 'mdl-badge--no-background'
 let OVERLAP_CLASS = 'mdl-badge--overlap'
 
-Vue.directive('mdl-badge', {
+Vue.directive('md-badge', {
   params: ['no-background', 'overlap'],
   bind () {
   },

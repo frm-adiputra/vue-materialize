@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import MdlButton from '../../mdl/Button'
+import MdButton from '../../md/Button'
 import marked from 'marked'
 import url from 'file!./md/ButtonPage.md'
 
@@ -8,7 +8,7 @@ Vue.component('button-page', function (resolve, reject) {
     resolve({
       template: '<div class="demo-page">' + marked(response.data) + '</div>',
       components: {
-        MdlButton
+        MdButton
       }
     })
   }, function (response) {

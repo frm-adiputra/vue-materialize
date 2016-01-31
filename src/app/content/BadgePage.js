@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import '../../mdl/Badge'
+import '../../md/Badge'
 import marked from 'marked'
 import url from 'file!./md/BadgePage.md'
 

@@ -12,6 +12,7 @@ import Home from './app/content/Home'
 import './app/content/BadgePage'
 import './app/content/ButtonPage'
 import './app/content/ProgressPage'
+import './app/content/CheckboxPage'
 
 /* eslint-disable no-new */
 var AppWrapper = Vue.extend({
@@ -28,6 +29,9 @@ router.map({
   },
   '/button': {
     component: Vue.component('button-page')
+  },
+  '/checkbox': {
+    component: Vue.component('checkbox-page')
   },
   '/progress': {
     component: Vue.component('progress-page')

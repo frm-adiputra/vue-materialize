@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import componentHandler from 'componentHandler'
+// import componentHandler from 'componentHandler'
 
 Vue.component('md-progress', {
   template: `<div class="mdl-progress mdl-js-progress" :class='{ "mdl-progress__indeterminate": indeterminate }'></div>`,
@@ -37,7 +37,7 @@ Vue.component('md-progress', {
     }
   },
   ready () {
-    componentHandler.upgradeElement(this.$el)
+    // componentHandler.upgradeElement(this.$el)
 
     if (this.indeterminate) {
       return

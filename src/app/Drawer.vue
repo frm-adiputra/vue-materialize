@@ -20,9 +20,20 @@
       <a class="mdl-navigation__link" v-link="{path: '/home'}">Home</a>
       <a class="mdl-navigation__link" v-link="{path: '/badge'}">Badges</a>
       <a class="mdl-navigation__link" v-link="{path: '/button'}">Buttons</a>
-      <a class="mdl-navigation__link" v-link="{path: '/card'}">Cards</a>
+      <a class="mdl-navigation__link" v-link="{path: '/card'}">** Cards</a>
+      <a class="mdl-navigation__link" v-link="{path: '/dialog'}">** Dialogs</a>
       <a class="mdl-navigation__link" v-link="{path: '/layout'}">Layout</a>
+      <a class="mdl-navigation__link" v-link="{path: '/list'}">** Lists</a>
+      <a class="mdl-navigation__link" v-link="{path: '/loading'}">** Loading</a>
       <a class="mdl-navigation__link" v-link="{path: '/progress'}">Progress bar</a>
+      <a class="mdl-navigation__link" v-link="{path: '/menu'}">** Menus</a>
+      <a class="mdl-navigation__link" v-link="{path: '/slider'}">** Sliders</a>
+      <a class="mdl-navigation__link" v-link="{path: '/snackbar'}">** Snackbar</a>
+      <a class="mdl-navigation__link" v-link="{path: '/toggle'}">** Toggles</a>
+      <a class="mdl-navigation__link" v-link="{path: '/checkbox'}">Checkboxes</a>
+      <a class="mdl-navigation__link" v-link="{path: '/table'}">** Tables</a>
+      <a class="mdl-navigation__link" v-link="{path: '/textfield'}">** Text fields</a>
+      <a class="mdl-navigation__link" v-link="{path: '/tooltip'}">** Tooltips</a>
       <div class="mdl-layout-spacer"></div>
       <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
     </nav>

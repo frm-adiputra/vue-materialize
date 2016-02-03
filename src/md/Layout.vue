@@ -7,7 +7,7 @@
 </template>
 
 <script>
-var componentHandler = require('componentHandler')
+// var componentHandler = require('componentHandler')
 
 export default {
   methods: {
@@ -19,7 +19,7 @@ export default {
     }
   },
   ready () {
-    componentHandler.upgradeElement(this.$el)
+    // componentHandler.upgradeElement(this.$el)
   }
 }
 </script>

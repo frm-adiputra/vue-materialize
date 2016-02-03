@@ -54,8 +54,6 @@ export default {
     }
   },
   methods: {
-    onChange (event) {
-    },
     onFocus (event) {
       this.focused = true
     },

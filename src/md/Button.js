@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import componentHandler from 'componentHandler'
+// import componentHandler from 'componentHandler'
 
 let EL_CLASS = 'mdl-button'
 let EL_JS_CLASS = 'mdl-js-button'
@@ -77,6 +77,6 @@ Vue.directive('md-button', {
       this.el.classList.remove(RIPPLE_CLASS)
     }
 
-    componentHandler.upgradeElement(this.el)
+    // componentHandler.upgradeElement(this.el)
   }
 })

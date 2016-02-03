@@ -3,7 +3,15 @@
 ## Bindings
 
 <div class="mdl-grid">
-  <div class="demo-cell mdl-cell mdl-cell--4-col mdl-cell--top mdl-cell--middle" :style='{textAlign: "start"}'>
+  <div class="demo-cell mdl-cell mdl-cell--8-col mdl-cell--top mdl-cell--middle" :style='{textAlign: "start"}'>
+    <md-checkbox id="jack" value="Jack" :checked.sync="checkedNames" ripple>Jack</md-checkbox>
+    <md-checkbox id="john" value="John" :checked.sync="checkedNames" ripple>John</md-checkbox>
+    <md-checkbox id="mike" value="Mike" :checked.sync="checkedNames" ripple>Mike</md-checkbox>
+    <span>Checked names: </span><span v-text="checkedNames | json"></span>
+  </div>
+</div>
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--8-col mdl-cell--top mdl-cell--middle" :style='{textAlign: "start"}'>
     <md-checkbox id="jack" value="Jack" :checked.sync="checkedNames" ripple>Jack</md-checkbox>
     <md-checkbox id="john" value="John" :checked.sync="checkedNames" ripple>John</md-checkbox>
     <md-checkbox id="mike" value="Mike" :checked.sync="checkedNames" ripple>Mike</md-checkbox>
@@ -40,7 +48,7 @@
   </div>
 
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <md-checkbox id="checkbox-2" ripple>Checkbox</md-checkbox>
+    <md-checkbox id="checkbox-2" :checked.sync='cb1' ripple>Checkbox</md-checkbox>
     <p class="mdl-typography--caption-color-contrast">Check off</p>
   </div>
 </div>
@@ -65,7 +73,7 @@
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <md-checkbox id="checkbox-3" ripple :checked.sync='cb1' disabled>Checkbox</md-checkbox>
+    <md-checkbox id="checkbox-3" ripple :checked.sync='cb1'>Checkbox</md-checkbox>
     <p class="mdl-typography--caption-color-contrast">Disabled check on</p>
   </div>
 

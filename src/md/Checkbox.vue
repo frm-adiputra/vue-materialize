@@ -2,8 +2,7 @@
   <label class="mdl-checkbox mdl-js-checkbox is-upgraded"
     :for.once="id"
     v-on:mouseup="onMouseUp"
-    v-md-ripple
-    :class='{"mdl-js-ripple-effect": ripple, "mdl-js-ripple-effect--ignore-events": ripple, "is-focused": focused, "is-disabled": disabled, "is-checked": inputChecked}'>
+    :class='{"mdl-js-ripple-effect": ripple, "is-focused": focused, "is-disabled": disabled, "is-checked": inputChecked}'>
 
     <input
       type="checkbox"
@@ -22,12 +21,11 @@
       <span class="mdl-checkbox__tick-outline"></span>
     </span>
 
-    <span
+    <md-ripple
       v-if="ripple"
-      v-on:mouseup="onMouseUp"
-      class="mdl-checkbox__ripple-container mdl-js-ripple-effect mdl-ripple--center">
+      class="mdl-ripple--center">
       <span class="mdl-ripple"></span>
-    </span>
+    </md-ripple>
   </label>
 </template>
 

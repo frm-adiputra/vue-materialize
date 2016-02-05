@@ -2,7 +2,8 @@
   <label class="mdl-checkbox mdl-js-checkbox is-upgraded"
     :for.once="id"
     v-on:mouseup="onMouseUp"
-    :class='{"mdl-js-ripple-effect": ripple, "is-focused": focused, "is-disabled": disabled, "is-checked": inputChecked}'>
+    v-md-ripple
+    :class='{"mdl-js-ripple-effect": ripple, "mdl-js-ripple-effect--ignore-events": ripple, "is-focused": focused, "is-disabled": disabled, "is-checked": inputChecked}'>
 
     <input
       type="checkbox"
@@ -21,13 +22,18 @@
       <span class="mdl-checkbox__tick-outline"></span>
     </span>
 
-    <span v-if="ripple" class="mdl-checkbox__ripple-container mdl-js-ripple-effect mdl-ripple--center">
-      <span class="mdl-ripple is-animating" style="width: 103.823px; height: 103.823px; transform: translate(-50%, -50%) translate(18px, 18px);"></span>
+    <span
+      v-if="ripple"
+      v-on:mouseup="onMouseUp"
+      class="mdl-checkbox__ripple-container mdl-js-ripple-effect mdl-ripple--center">
+      <span class="mdl-ripple"></span>
     </span>
   </label>
 </template>
 
 <script>
+import './Ripple'
+
 let TINY_TIMEOUT = 0.001
 
 export default {
@@ -54,8 +60,6 @@ export default {
     }
   },
   methods: {
-    onChange (event) {
-    },
     onFocus (event) {
       this.focused = true
     },

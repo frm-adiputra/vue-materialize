@@ -1,8 +1,11 @@
 import Vue from 'vue'
-// import componentHandler from 'componentHandler'
 
 Vue.component('md-progress', {
-  template: `<div class="mdl-progress mdl-js-progress" :class='{ "mdl-progress__indeterminate": indeterminate }'></div>`,
+  template: `<div class="mdl-progress mdl-js-progress" :class='{ "mdl-progress__indeterminate": indeterminate }'>
+  <div v-el:progressbar class="progressbar bar bar1" :style="{width: progress + '%'}"></div>
+  <div v-el:bufferbar class="bufferbar bar bar2" :style="{width: buffer + '%'}"></div>
+  <div v-el:auxbar class="auxbar bar bar3" :style="{width: auxwidth}"></div>
+</div>`,
   props: {
     indeterminate: {
       type: Boolean
@@ -16,34 +19,32 @@ Vue.component('md-progress', {
     },
     buffer: {
       type: Number,
-      default: 0,
+      default: 100,
       validator (value) {
         return value >= 0 && value <= 100
       }
     }
   },
-  watch: {
-    progress: function (val, oldVal) {
+  computed: {
+    progresswidth () {
       if (this.indeterminate) {
-        return
+        return '0%'
       }
-      this.$el.MaterialProgress.setProgress(val)
+      return this.progress + '%'
     },
-    buffer: function (val, oldVal) {
+    bufferwidth () {
       if (this.indeterminate) {
-        return
+        return '100%'
       }
-      this.$el.MaterialProgress.setBuffer(val)
+      return this.progress + '%'
+    },
+    auxwidth () {
+      return (100 - this.buffer) + '%'
     }
   },
   ready () {
-    // componentHandler.upgradeElement(this.$el)
-
     if (this.indeterminate) {
       return
     }
-
-    this.$el.MaterialProgress.setProgress(this.progress)
-    this.$el.MaterialProgress.setBuffer(this.buffer)
   }
 })

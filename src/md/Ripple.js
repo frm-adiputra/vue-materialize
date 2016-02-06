@@ -136,8 +136,7 @@ class RippleAnimation {
 }
 
 Vue.component('md-ripple', {
-  template: `<span
-    class="mdl-checkbox__ripple-container mdl-js-ripple-effect mdl-ripple--center">
+  template: `<span>
     <span v-el:ripple class="mdl-ripple"></span>
   </span>`,
   created () {
@@ -146,7 +145,7 @@ Vue.component('md-ripple', {
   ready () {
     let rippleParent = getClosestParentWithClass(this.$el, cssClasses.RIPPLE_PARENT)
     if (!rippleParent) {
-      console.log('Please add class' + cssClasses.RIPPLE_PARENT + ' to the parent element of ripple')
+      console.error('Please add class' + cssClasses.RIPPLE_PARENT + ' to the parent element of ripple')
       return
     }
 
@@ -156,16 +155,16 @@ Vue.component('md-ripple', {
       rippleParent.classList.contains(cssClasses.RIPPLE_CENTER)
     )
 
-    if (!rippleParent.classList.contains(cssClasses.RIPPLE_EFFECT_IGNORE_EVENTS)) {
-      let boundDownHandler = this.anim_.downHandler.bind(this.anim_)
-      rippleParent.addEventListener('mousedown', boundDownHandler)
-      rippleParent.addEventListener('touchstart', boundDownHandler)
+    // if (!rippleParent.classList.contains(cssClasses.RIPPLE_EFFECT_IGNORE_EVENTS)) {
+    let boundDownHandler = this.anim_.downHandler.bind(this.anim_)
+    rippleParent.addEventListener('mousedown', boundDownHandler)
+    rippleParent.addEventListener('touchstart', boundDownHandler)
 
-      let boundUpHandler = this.anim_.upHandler.bind(this.anim_)
-      rippleParent.addEventListener('mouseup', boundUpHandler)
-      rippleParent.addEventListener('mouseleave', boundUpHandler)
-      rippleParent.addEventListener('touchend', boundUpHandler)
-      rippleParent.addEventListener('blur', boundUpHandler)
-    }
+    let boundUpHandler = this.anim_.upHandler.bind(this.anim_)
+    rippleParent.addEventListener('mouseup', boundUpHandler)
+    rippleParent.addEventListener('mouseleave', boundUpHandler)
+    rippleParent.addEventListener('touchend', boundUpHandler)
+    rippleParent.addEventListener('blur', boundUpHandler)
+    // }
   }
 })

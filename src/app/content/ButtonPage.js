@@ -1,12 +1,17 @@
 import Vue from 'vue'
-import '../../md/Button'
+import MdButton from '../../md/Button'
+import MdLinkButton from '../../md/LinkButton'
 import marked from 'marked'
 import url from 'file!./md/ButtonPage.md'
 
 Vue.component('button-page', function (resolve, reject) {
   Vue.http({url: url, method: 'GET'}).then(function (response) {
     resolve({
-      template: '<div class="demo-page">' + marked(response.data) + '</div>'
+      template: '<div class="demo-page">' + marked(response.data) + '</div>',
+      components: {
+        MdButton,
+        MdLinkButton
+      }
     })
   }, function (response) {
     reject(response)

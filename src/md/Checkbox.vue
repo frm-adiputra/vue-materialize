@@ -23,8 +23,7 @@
 
     <md-ripple
       v-if="ripple"
-      class="mdl-ripple--center">
-      <span class="mdl-ripple"></span>
+      class="mdl-js-ripple-effect mdl-checkbox__ripple-container mdl-ripple--center">
     </md-ripple>
   </label>
 </template>

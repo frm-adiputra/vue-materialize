@@ -21,13 +21,16 @@
       <span class="mdl-checkbox__tick-outline"></span>
     </span>
 
-    <span v-if="ripple" class="mdl-checkbox__ripple-container mdl-js-ripple-effect mdl-ripple--center">
-      <span class="mdl-ripple is-animating" style="width: 103.823px; height: 103.823px; transform: translate(-50%, -50%) translate(18px, 18px);"></span>
-    </span>
+    <md-ripple
+      v-if="ripple"
+      class="mdl-js-ripple-effect mdl-checkbox__ripple-container mdl-ripple--center">
+    </md-ripple>
   </label>
 </template>
 
 <script>
+import './Ripple'
+
 let TINY_TIMEOUT = 0.001
 
 export default {

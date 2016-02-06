@@ -5,10 +5,10 @@
       <div class="demo-avatar-dropdown">
         <span>hello@example.com</span>
         <div class="mdl-layout-spacer"></div>
-        <button v-md-button id="accbtn" ripple icon>
+        <md-button id="accbtn" ripple icon>
           <i class="material-icons" role="presentation">arrow_drop_down</i>
           <span class="visuallyhidden">Accounts</span>
-        </button>
+        </md-button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
           <li class="mdl-menu__item">hello@example.com</li>
           <li class="mdl-menu__item">info@example.com</li>
@@ -41,13 +41,14 @@
 </template>
 
 <script>
-import '../md/Button'
+import MdButton from '../md/Button'
 import MdLayoutDrawer from '../md/layout/Drawer'
 import MdLayoutTitle from '../md/layout/Title'
 import MdLayoutSpacer from '../md/layout/Spacer'
 
 export default {
   components: {
+    MdButton,
     MdLayoutDrawer,
     MdLayoutTitle,
     MdLayoutSpacer

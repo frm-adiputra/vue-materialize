@@ -5,282 +5,260 @@ Variations on Material Design buttons.
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button fab colored><i class="material-icons">add</i></button>
+    <md-button fab colored><i class="material-icons">add</i></md-button>
     <p class="mdl-typography--caption-color-contrast">Colored FAB</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button ripple fab colored><i class="material-icons">add</i></button>
+    <md-button ripple fab colored><i class="material-icons">add</i></md-button>
     <p class="mdl-typography--caption-color-contrast">With ripple</p>
   </div>
 
 </div>
 ```html
 <!-- Colored FAB button -->
-<button v-md-button fab colored>
+<md-button fab colored>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 
 <!-- Colored FAB button with ripple -->
-<button v-md-button ripple fab colored>
+<md-button ripple fab colored>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button fab>
+    <md-button fab>
       <i class="material-icons">add</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Plain FAB</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button fab ripple>
+    <md-button fab ripple>
       <i class="material-icons">add</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">With ripple</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button fab disabled>
+    <md-button fab disabled>
       <i class="material-icons">add</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Disabled</p>
   </div>
 </div>
 
 ```html
 <!-- FAB button -->
-<button v-md-button fab>
+<md-button fab>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 
 <!-- FAB button with ripple -->
-<button v-md-button fab ripple>
+<md-button fab ripple>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 
 <!-- Disabled FAB button -->
-<button v-md-button fab disabled>
+<md-button fab disabled>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button raised>
+    <md-button raised>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Raised button</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button raised ripple>
+    <md-button raised ripple>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">With ripple</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button raised disabled>
+    <md-button raised disabled>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Disabled</p>
   </div>
 </div>
 
 ```html
 <!-- Raised button -->
-<button v-md-button raised>
+<md-button raised>
   Button
-</button>
+</md-button>
 
 <!-- Raised button with ripple -->
-<button v-md-button raised ripple>
+<md-button raised ripple>
   Button
-</button>
+</md-button>
 
 <!-- Raised disabled button-->
-<button v-md-button raised disabled>
+<md-button raised disabled>
   Button
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button raised colored>
+    <md-button raised colored>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Colored button</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button raised accent>
+    <md-button raised accent>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Accent colored</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button raised accent ripple>
+    <md-button raised accent ripple>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">With ripple</p>
   </div>
 </div>
 
 ```html
 <!-- Colored raised button -->
-<button v-md-button raised colored>
+<md-button raised colored>
   Button
-</button>
+</md-button>
 
 <!-- Accent-colored raised button -->
-<button v-md-button raised accent>
+<md-button raised accent>
   Button
-</button>
+</md-button>
 
 <!-- Accent-colored raised button with ripple -->
-<button v-md-button raised accent ripple>
+<md-button raised accent ripple>
   Button
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button>
+    <md-button>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Flat button</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button ripple>
+    <md-button ripple>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">With ripple</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button disabled>
+    <md-button disabled>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Disabled</p>
   </div>
 </div>
 
 ```html
 <!-- Flat button -->
-<button v-md-button>
+<md-button>
   Button
-</button>
+</md-button>
 
 <!-- Flat button with ripple -->
-<button v-md-button ripple>
+<md-button ripple>
   Button
-</button>
+</md-button>
 
 <!-- Disabled flat button -->
-<button v-md-button disabled>
+<md-button disabled>
   Button
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button primary>
+    <md-button primary>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Primary colored flat</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button accent>
+    <md-button accent>
       Button
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Accent colored flat</p>
   </div>
 </div>
 
 ```html
 <!-- Primary-colored flat button -->
-<button v-md-button primary>
+<md-button primary>
   Button
-</button>
+</md-button>
 
 <!-- Accent-colored flat button -->
-<button v-md-button accent>
+<md-button accent>
   Button
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button icon>
+    <md-button icon>
       <i class="material-icons">mood</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Icon button</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button icon colored>
+    <md-button icon colored>
       <i class="material-icons">mood</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Colored</p>
   </div>
 </div>
 
 ```html
 <!-- Icon button -->
-<button v-md-button icon>
+<md-button icon>
   <i class="material-icons">mood</i>
-</button>
+</md-button>
 
 <!-- Colored icon button -->
-<button v-md-button icon colored>
+<md-button icon colored>
   <i class="material-icons">mood</i>
-</button>
+</md-button>
 ```
 
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button fab mini-fab>
+    <md-button fab mini-fab>
       <i class="material-icons">add</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Mini FAB</p>
   </div>
   <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <button v-md-button fab mini-fab colored>
+    <md-button fab mini-fab colored>
       <i class="material-icons">add</i>
-    </button>
+    </md-button>
     <p class="mdl-typography--caption-color-contrast">Colored</p>
   </div>
 </div>
 
 ```html
 <!-- Mini FAB button -->
-<button v-md-button fab mini-fab>
+<md-button fab mini-fab>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 
 <!-- Colored mini FAB button -->
-<button v-md-button fab mini-fab colored>
+<md-button fab mini-fab colored>
   <i class="material-icons">add</i>
-</button>
+</md-button>
 ```
 
-<div class="mdl-grid">
-  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <a v-md-button fab colored><i class="material-icons">add</i></a>
-    <p class="mdl-typography--caption-color-contrast">Colored FAB link button</p>
-  </div>
-  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
-    <a v-md-button ripple fab colored><i class="material-icons">add</i></a>
-    <p class="mdl-typography--caption-color-contrast">With ripple</p>
-  </div>
-
-</div>
-```html
-<!-- Colored FAB link button -->
-<a v-md-button fab colored>
-  <i class="material-icons">add</i>
-</a>
-
-<!-- Colored FAB link button with ripple -->
-<a v-md-button ripple fab colored>
-  <i class="material-icons">add</i>
-</a>
-```
 
 ## Props
 - `raised`: Applies _raised_ display effect  
@@ -301,3 +279,292 @@ Variations on Material Design buttons.
   May be used in combination with any other classes
 - `disabled`: Disables button  
   May be used with any button version
+
+# LINK BUTTONS
+
+Material Design buttons, but implemented using `<a>` element.
+
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab colored><i class="material-icons">add</i></md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Colored FAB</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button ripple fab colored><i class="material-icons">add</i></md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+
+</div>
+```html
+<!-- Colored FAB button -->
+<md-link-button fab colored>
+  <i class="material-icons">add</i>
+</md-link-button>
+
+<!-- Colored FAB button with ripple -->
+<md-link-button ripple fab colored>
+  <i class="material-icons">add</i>
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Plain FAB</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab ripple>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab disabled>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Disabled</p>
+  </div>
+</div>
+
+```html
+<!-- FAB button -->
+<md-link-button fab>
+  <i class="material-icons">add</i>
+</md-link-button>
+
+<!-- FAB button with ripple -->
+<md-link-button fab ripple>
+  <i class="material-icons">add</i>
+</md-link-button>
+
+<!-- Disabled FAB button -->
+<md-link-button fab disabled>
+  <i class="material-icons">add</i>
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button raised>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Raised button</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button raised ripple>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button raised disabled>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Disabled</p>
+  </div>
+</div>
+
+```html
+<!-- Raised button -->
+<md-link-button raised>
+  Button
+</md-link-button>
+
+<!-- Raised button with ripple -->
+<md-link-button raised ripple>
+  Button
+</md-link-button>
+
+<!-- Raised disabled button-->
+<md-link-button raised disabled>
+  Button
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button raised colored>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Colored button</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button raised accent>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Accent colored</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button raised accent ripple>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+</div>
+
+```html
+<!-- Colored raised button -->
+<md-link-button raised colored>
+  Button
+</md-link-button>
+
+<!-- Accent-colored raised button -->
+<md-link-button raised accent>
+  Button
+</md-link-button>
+
+<!-- Accent-colored raised button with ripple -->
+<md-link-button raised accent ripple>
+  Button
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Flat button</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button ripple>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button disabled>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Disabled</p>
+  </div>
+</div>
+
+```html
+<!-- Flat button -->
+<md-link-button>
+  Button
+</md-link-button>
+
+<!-- Flat button with ripple -->
+<md-link-button ripple>
+  Button
+</md-link-button>
+
+<!-- Disabled flat button -->
+<md-link-button disabled>
+  Button
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button primary>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Primary colored flat</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button accent>
+      Button
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Accent colored flat</p>
+  </div>
+</div>
+
+```html
+<!-- Primary-colored flat button -->
+<md-link-button primary>
+  Button
+</md-link-button>
+
+<!-- Accent-colored flat button -->
+<md-link-button accent>
+  Button
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button icon>
+      <i class="material-icons">mood</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Icon button</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button icon colored>
+      <i class="material-icons">mood</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Colored</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button icon ripple>
+      <i class="material-icons">mood</i>
+    </md-link-button>
+    <md-link-button icon colored ripple>
+      <i class="material-icons">mood</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+</div>
+
+```html
+<!-- Icon button -->
+<md-link-button icon>
+  <i class="material-icons">mood</i>
+</md-link-button>
+
+<!-- Colored icon button -->
+<md-link-button icon colored>
+  <i class="material-icons">mood</i>
+</md-link-button>
+
+<!-- Colored icon button with ripple -->
+<md-link-button icon colored ripple>
+  <i class="material-icons">mood</i>
+</md-link-button>
+```
+
+<div class="mdl-grid">
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab mini-fab>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Mini FAB</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab mini-fab colored>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">Colored</p>
+  </div>
+  <div class="demo-cell mdl-cell mdl-cell--2-col mdl-cell--top mdl-cell--middle">
+    <md-link-button fab mini-fab ripple>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <md-link-button fab mini-fab colored ripple>
+      <i class="material-icons">add</i>
+    </md-link-button>
+    <p class="mdl-typography--caption-color-contrast">With ripple</p>
+  </div>
+</div>
+
+```html
+<!-- Mini FAB button -->
+<md-link-button fab mini-fab>
+  <i class="material-icons">add</i>
+</md-link-button>
+
+<!-- Colored mini FAB button -->
+<md-link-button fab mini-fab colored>
+  <i class="material-icons">add</i>
+</md-link-button>
+
+<!-- Colored mini FAB button with ripple -->
+<md-link-button fab mini-fab colored ripple>
+  <i class="material-icons">add</i>
+</md-link-button>
+```

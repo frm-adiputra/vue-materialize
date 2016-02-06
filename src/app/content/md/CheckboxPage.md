@@ -12,9 +12,9 @@
 </div>
 <div class="mdl-grid">
   <div class="demo-cell mdl-cell mdl-cell--8-col mdl-cell--top mdl-cell--middle" :style='{textAlign: "start"}'>
-    <md-checkbox id="jack" value="Jack" :checked.sync="checkedNames" ripple>Jack</md-checkbox>
-    <md-checkbox id="john" value="John" :checked.sync="checkedNames" ripple>John</md-checkbox>
-    <md-checkbox id="mike" value="Mike" :checked.sync="checkedNames" ripple>Mike</md-checkbox>
+    <md-checkbox id="jack1" value="Jack" :checked.sync="checkedNames" ripple>Jack</md-checkbox>
+    <md-checkbox id="john1" value="John" :checked.sync="checkedNames" ripple>John</md-checkbox>
+    <md-checkbox id="mike1" value="Mike" :checked.sync="checkedNames" ripple>Mike</md-checkbox>
     <span>Checked names: </span><span v-text="checkedNames | json"></span>
   </div>
 </div>

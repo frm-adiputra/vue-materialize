@@ -13,6 +13,7 @@ import './app/content/BadgePage'
 import './app/content/ButtonPage'
 import './app/content/ProgressPage'
 import './app/content/CheckboxPage'
+import './app/content/MenuPage'
 
 /* eslint-disable no-new */
 var AppWrapper = Vue.extend({
@@ -35,6 +36,9 @@ router.map({
   },
   '/progress': {
     component: Vue.component('progress-page')
+  },
+  'menu': {
+    component: Vue.component('menu-page')
   }
 })
 

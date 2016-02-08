@@ -20,7 +20,12 @@ Vue.component('menu-page', function (resolve, reject) {
             {title: 'Copy'},
             {title: 'Paste'}
           ],
-          mymenuVisible: true
+          mymenuVisible: false
+        }
+      },
+      methods: {
+        toggleMenu () {
+          this.mymenuVisible = !this.mymenuVisible
         }
       }
     })

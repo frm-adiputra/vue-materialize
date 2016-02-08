@@ -1,14 +1,15 @@
 <template>
   <div
     v-el:container
+    transition="menu"
     class="mdl-menu__container is-upgraded"
     :class="{'is-visible': visible}"
-    :style="{width: width, height: height, left: left, right: right, bottom: bottom, top: top}">
+    :style="{width: width + 'px', height: height + 'px', left: left, right: right, bottom: bottom, top: top}">
     <div
       v-el:outline
       class="mdl-menu__outline"
       :class="{'mdl-menu--bottom-left': bottomLeft, 'mdl-menu--bottom-right': bottomRight, 'mdl-menu--top-right': topRight, 'mdl-menu--top-left': topLeft, 'mdl-menu--unaligned': unaligned}"
-      :style="{width: width, height: height}">
+      :style="{width: width + 'px', height: height + 'px'}">
     </div>
     <ul
       v-el:element
@@ -67,6 +68,59 @@ export default {
     MdMenuItem
   },
 
+  transitions: {
+    'menu': {
+      beforeEnter () {
+        this.adjustPosition_()
+      },
+      enter (el, done) {
+        let removeAnimationEndListener = (evt) => {
+          this.$el.removeEventListener('transitionend', removeAnimationEndListener)
+          this.$el.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
+          this.animating = false
+          done()
+        }
+
+        this.$el.addEventListener('transitionend', removeAnimationEndListener)
+        this.$el.addEventListener('webkitTransitionEnd', removeAnimationEndListener)
+
+        this.adjustSize_()
+        this.applyItemDelay_()
+
+        this.animating = true
+        this.$els.outline.style.transform = ''
+        this.clip = 'rect(0 ' + this.width + 'px ' + this.height + 'px 0)'
+        this.visible = true
+      },
+      enterCancelled (el) {
+
+      },
+      beforeLeave () {
+        this.removeItemDelay_()
+        this.adjustSize_()
+      },
+      leave (el, done) {
+        this.animating = true
+        this.$els.outline.style.transform = 'scale(0)'
+        this.applyClip_()
+
+        let removeAnimationEndListener = (evt) => {
+          this.$el.removeEventListener('transitionend', removeAnimationEndListener)
+          this.$el.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
+          this.animating = false
+          this.visible = false
+          done()
+        }
+
+        this.$el.addEventListener('transitionend', removeAnimationEndListener)
+        this.$el.addEventListener('webkitTransitionEnd', removeAnimationEndListener)
+      },
+      leaveCancelled (el) {
+
+      }
+    }
+  },
+
   props: {
     ripple: Boolean,
     menu: {
@@ -110,47 +164,6 @@ export default {
   },
 
   methods: {
-    /**
-     * Handles a click on the "for" element, by positioning the menu and then
-     * toggling it.
-     *
-     * @param {Event} evt The event that fired.
-     * @private
-     */
-    handleForClick_ (evt) {
-      if (this.$els.element && this.forElement_) {
-        let rect = this.forElement_.getBoundingClientRect()
-        let forRect = this.forElement_.parentElement.getBoundingClientRect()
-
-        if (this.unaligned) {
-          // Do not position the menu automatically. Requires the developer to
-          // manually specify position.
-        } else if (this.bottomRight) {
-          this.left = null
-          this.right = (forRect.right - rect.right) + 'px'
-          this.top = this.forElement_.offsetTop + this.forElement_.offsetHeight + 'px'
-          this.bottom = null
-        } else if (this.topLeft) {
-          this.left = this.forElement_.offsetLeft + 'px'
-          this.right = null
-          this.top = null
-          this.bottom = (forRect.bottom - rect.top) + 'px'
-        } else if (this.topRight) {
-          this.left = null
-          this.right = (forRect.right - rect.right) + 'px'
-          this.top = null
-          this.bottom = (forRect.bottom - rect.top) + 'px'
-        } else { // this.bottomLeft
-          this.left = this.forElement_.offsetLeft + 'px'
-          this.right = null
-          this.top = this.forElement_.offsetTop + this.forElement_.offsetHeight + 'px'
-          this.bottom = null
-        }
-      }
-
-      this.toggle(evt)
-    },
-
     /**
      * Handles a keyboard event on the "for" element.
      *
@@ -240,73 +253,45 @@ export default {
       }
     },
 
-    /**
-     * Calculates the initial clip (for opening the menu) or final clip (for closing
-     * it), and applies it. This allows us to animate from or to the correct point,
-     * that is, the point it's aligned to in the "for" element.
-     *
-     * @param {number} height Height of the clip rectangle
-     * @param {number} width Width of the clip rectangle
-     * @private
-     */
-    applyClip_ (height, width) {
-      if (this.unaligned) {
-        // Do not clip.
-        this.clip = ''
-      } else if (this.bottomRight) {
-        // Clip to the top right corner of the menu.
-        this.clip =
-            'rect(0 ' + width + 'px ' + '0 ' + width + 'px)'
-      } else if (this.topLeft) {
-        // Clip to the bottom left corner of the menu.
-        this.clip =
-            'rect(' + height + 'px 0 ' + height + 'px 0)'
-      } else if (this.topRight) {
-        // Clip to the bottom right corner of the menu.
-        this.clip = 'rect(' + height + 'px ' + width + 'px ' +
-            height + 'px ' + width + 'px)'
-      } else { // this.bottomLeft
-        // Default: do not clip (same as clipping to the top left corner).
-        this.clip = ''
+    adjustPosition_ () {
+      if (this.$els.element && this.forElement_) {
+        let rect = this.forElement_.getBoundingClientRect()
+        let forRect = this.forElement_.parentElement.getBoundingClientRect()
+
+        if (this.unaligned) {
+          // Do not position the menu automatically. Requires the developer to
+          // manually specify position.
+        } else if (this.bottomRight) {
+          this.left = null
+          this.right = (forRect.right - rect.right) + 'px'
+          this.top = this.forElement_.offsetTop + this.forElement_.offsetHeight + 'px'
+          this.bottom = null
+        } else if (this.topLeft) {
+          this.left = this.forElement_.offsetLeft + 'px'
+          this.right = null
+          this.top = null
+          this.bottom = (forRect.bottom - rect.top) + 'px'
+        } else if (this.topRight) {
+          this.left = null
+          this.right = (forRect.right - rect.right) + 'px'
+          this.top = null
+          this.bottom = (forRect.bottom - rect.top) + 'px'
+        } else { // this.bottomLeft
+          this.left = this.forElement_.offsetLeft + 'px'
+          this.right = null
+          this.top = this.forElement_.offsetTop + this.forElement_.offsetHeight + 'px'
+          this.bottom = null
+        }
       }
     },
 
-    /**
-     * Cleanup function to remove animation listeners.
-     *
-     * @param {Event} evt
-     * @private
-     */
-
-    removeAnimationEndListener_ (evt) {
-      this.animating = false
-      // evt.target.classList.remove(cssClasses.IS_ANIMATING)
+    adjustSize_ () {
+      let rect = this.$els.element.getBoundingClientRect()
+      this.height = rect.height
+      this.width = rect.width
     },
 
-    /**
-     * Adds an event listener to clean up after the animation ends.
-     *
-     * @private
-     */
-    addAnimationEndListener_ () {
-      this.$els.element.addEventListener('transitionend', this.removeAnimationEndListener_)
-      this.$els.element.addEventListener('webkitTransitionEnd', this.removeAnimationEndListener_)
-    },
-
-    /**
-     * Displays the menu.
-     *
-     * @public
-     */
-    show (evt) {
-      console.log('show')
-      let height = this.$els.element.getBoundingClientRect().height
-      let width = this.$els.element.getBoundingClientRect().width
-
-      // Apply the inner element's size to the container and outline.
-      this.width = width + 'px'
-      this.height = height + 'px'
-
+    applyItemDelay_ () {
       let transitionDuration = constants.TRANSITION_DURATION_SECONDS *
           constants.TRANSITION_DURATION_FRACTION
 
@@ -316,27 +301,96 @@ export default {
       for (let i = 0; i < items.length; i++) {
         let itemDelay = null
         if (this.topLeft || this.topRight) {
-          itemDelay = ((height - items[i].$el.offsetTop - items[i].$el.offsetHeight) /
-              height * transitionDuration) + 's'
+          itemDelay = ((this.height - items[i].$el.offsetTop - items[i].$el.offsetHeight) /
+              this.height * transitionDuration) + 's'
         } else {
-          itemDelay = (items[i].$el.offsetTop / height * transitionDuration) + 's'
+          itemDelay = (items[i].$el.offsetTop / this.height * transitionDuration) + 's'
         }
         items[i].$el.style.transitionDelay = itemDelay
       }
+    },
 
-      // Apply the initial clip to the text before we start animating.
-      this.applyClip_(height, width)
+    removeItemDelay_ () {
+      // Remove all transition delays; menu items fade out concurrently.
+      let items = this.$refs.items
+      for (let i = 0; i < items.length; i++) {
+        items[i].$el.style.removeProperty('transition-delay')
+      }
+    },
 
-      // Wait for the next frame, turn on animation, and apply the final clip.
-      // Also make it visible. This triggers the transitions.
-      window.requestAnimationFrame(() => {
-        this.animating = true
-        this.clip = 'rect(0 ' + width + 'px ' + height + 'px 0)'
-        this.visible = true
-      })
+    /**
+     * Calculates the initial clip (for opening the menu) or final clip (for closing
+     * it), and applies it. This allows us to animate from or to the correct point,
+     * that is, the point it's aligned to in the "for" element.
+     *
+     * @private
+     */
+    applyClip_ () {
+      if (this.unaligned) {
+        // Do not clip.
+        this.clip = ''
+      } else if (this.bottomRight) {
+        // Clip to the top right corner of the menu.
+        this.clip =
+            'rect(0 ' + this.width + 'px ' + '0 ' + this.width + 'px)'
+      } else if (this.topLeft) {
+        // Clip to the bottom left corner of the menu.
+        this.clip =
+            'rect(' + this.height + 'px 0 ' + this.height + 'px 0)'
+      } else if (this.topRight) {
+        // Clip to the bottom right corner of the menu.
+        this.clip = 'rect(' + this.height + 'px ' + this.width + 'px ' +
+            this.height + 'px ' + this.width + 'px)'
+      } else { // this.bottomLeft
+        // Default: do not clip (same as clipping to the top left corner).
+        this.clip = ''
+      }
+    },
 
-      // Clean up after the animation is complete.
-      this.addAnimationEndListener_()
+    /**
+     * Displays the menu.
+     *
+     * @public
+     */
+    show (evt) {
+      console.log('show')
+      // let height = this.$els.element.getBoundingClientRect().height
+      // let width = this.$els.element.getBoundingClientRect().width
+      //
+      // // Apply the inner element's size to the container and outline.
+      // this.width = width + 'px'
+      // this.height = height + 'px'
+
+      // let transitionDuration = constants.TRANSITION_DURATION_SECONDS *
+      //     constants.TRANSITION_DURATION_FRACTION
+      //
+      // // Calculate transition delays for individual menu items, so that they fade
+      // // in one at a time.
+      // let items = this.$refs.items
+      // for (let i = 0; i < items.length; i++) {
+      //   let itemDelay = null
+      //   if (this.topLeft || this.topRight) {
+      //     itemDelay = ((height - items[i].$el.offsetTop - items[i].$el.offsetHeight) /
+      //         height * transitionDuration) + 's'
+      //   } else {
+      //     itemDelay = (items[i].$el.offsetTop / height * transitionDuration) + 's'
+      //   }
+      //   items[i].$el.style.transitionDelay = itemDelay
+      // }
+
+      // // Apply the initial clip to the text before we start animating.
+      // this.applyClip_(height, width)
+      //
+      // // Wait for the next frame, turn on animation, and apply the final clip.
+      // // Also make it visible. This triggers the transitions.
+      // window.requestAnimationFrame(() => {
+      //   this.animating = true
+      //   this.clip = 'rect(0 ' + width + 'px ' + height + 'px 0)'
+      //   this.visible = true
+      // })
+
+      // // Clean up after the animation is complete.
+      // this.addAnimationEndListener_()
 
       // Add a click listener to the document, to close the menu.
       let callback = (e) => {
@@ -362,44 +416,44 @@ export default {
      */
     hide () {
       console.log('hide')
-      if (this.$els.element && this.$els.container && this.$els.outline) {
-        let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM)
-
-        // Remove all transition delays; menu items fade out concurrently.
-        for (let i = 0; i < items.length; i++) {
-          items[i].style.removeProperty('transition-delay')
-        }
-
-        // Measure the inner element.
-        let rect = this.$els.element.getBoundingClientRect()
-        let height = rect.height
-        let width = rect.width
-
-        // Turn on animation, and apply the final clip. Also make invisible.
-        // This triggers the transitions.
-        // this.$els.element.classList.add(cssClasses.IS_ANIMATING)
-        this.animating = true
-        this.applyClip_(height, width)
-        this.visible = false
-        // this.$els.container.classList.remove(cssClasses.IS_VISIBLE)
-
-        // Clean up after the animation is complete.
-        this.addAnimationEndListener_()
-      }
-    },
+      // if (this.$els.element && this.$els.container && this.$els.outline) {
+      //   let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM)
+      //
+      //   // Remove all transition delays; menu items fade out concurrently.
+      //   for (let i = 0; i < items.length; i++) {
+      //     items[i].style.removeProperty('transition-delay')
+      //   }
+      //
+      //   // Measure the inner element.
+      //   let rect = this.$els.element.getBoundingClientRect()
+      //   let height = rect.height
+      //   let width = rect.width
+      //
+      //   // Turn on animation, and apply the final clip. Also make invisible.
+      //   // This triggers the transitions.
+      //   // this.$els.element.classList.add(cssClasses.IS_ANIMATING)
+      //   this.animating = true
+      //   this.applyClip_(height, width)
+      //   this.visible = false
+      //   // this.$els.container.classList.remove(cssClasses.IS_VISIBLE)
+      //
+      //   // Clean up after the animation is complete.
+      //   this.addAnimationEndListener_()
+      // }
+    }
 
     /**
      * Displays or hides the menu, depending on current state.
      *
      * @public
      */
-    toggle (evt) {
-      if (!this.visible) {
-        this.show(evt)
-      } else {
-        this.hide()
-      }
-    }
+    // toggle (evt) {
+    //   if (!this.visible) {
+    //     this.show(evt)
+    //   } else {
+    //     this.hide()
+    //   }
+    // }
   },
 
   ready () {
@@ -408,8 +462,8 @@ export default {
       let forEl = document.getElementById(this.for)
       if (forEl) {
         this.forElement_ = forEl
-        forEl.addEventListener('click', this.handleForClick_)
-        forEl.addEventListener('keydown', this.handleForKeyboardEvent_)
+        // forEl.addEventListener('click', this.handleForClick_)
+        // forEl.addEventListener('keydown', this.handleForKeyboardEvent_)
       }
     }
 

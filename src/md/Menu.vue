@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="show"
     v-el:container
     transition="menu"
     class="mdl-menu__container is-upgraded"
@@ -14,6 +15,8 @@
     <ul
       v-el:element
       class="mdl-menu mdl-js-menu"
+      tabindex="-1"
+      v-on:keydown="handleForKeyboardEvent_"
       :class="{'mdl-js-ripple-effect': ripple, 'mdl-js-ripple-effect--ignore-events': ripple, 'mdl-menu--bottom-left': bottomLeft, 'mdl-menu--bottom-right': bottomRight, 'mdl-menu--top-right': topRight, 'mdl-menu--top-left': topLeft, 'mdl-menu--unaligned': unaligned, 'is-animating': animating}"
       :style="{clip: clip}">
 
@@ -21,8 +24,8 @@
         v-ref:items
         tabindex="-1"
         :ripple.once="ripple"
-        v-on:keydown="handleItemKeyboardEvent"
-        v-on:click="handleItemClick">
+        v-on:keydown="handleItemKeyboardEvent_"
+        v-on:click="handleItemClick_">
 
         <partial :name="itemPartial"></partial>
       </md-menu-item>
@@ -44,23 +47,15 @@ let constants = {
 }
 
 let cssClasses = {
-  CONTAINER: 'mdl-menu__container',
-  OUTLINE: 'mdl-menu__outline',
-  ITEM: 'mdl-menu__item',
-  ITEM_RIPPLE_CONTAINER: 'mdl-menu__item-ripple-container',
-  RIPPLE_EFFECT: 'mdl-js-ripple-effect',
-  RIPPLE_IGNORE_EVENTS: 'mdl-js-ripple-effect--ignore-events',
-  RIPPLE: 'mdl-ripple',
-  // Statuses
-  IS_UPGRADED: 'is-upgraded',
-  IS_VISIBLE: 'is-visible',
-  IS_ANIMATING: 'is-animating',
-  // Alignment options
-  BOTTOM_LEFT: 'mdl-menu--bottom-left',  // This is the default.
-  BOTTOM_RIGHT: 'mdl-menu--bottom-right',
-  TOP_LEFT: 'mdl-menu--top-left',
-  TOP_RIGHT: 'mdl-menu--top-right',
-  UNALIGNED: 'mdl-menu--unaligned'
+  ITEM: 'mdl-menu__item'
+}
+
+let keycodes = {
+  ENTER: 13,
+  ESCAPE: 27,
+  SPACE: 32,
+  UP_ARROW: 38,
+  DOWN_ARROW: 40
 }
 
 export default {
@@ -78,6 +73,7 @@ export default {
           this.$el.removeEventListener('transitionend', removeAnimationEndListener)
           this.$el.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
           this.animating = false
+          this.$els.element.focus()
           done()
         }
 
@@ -125,6 +121,11 @@ export default {
     ripple: Boolean,
     menu: {
       type: Array
+    },
+    show: {
+      type: Boolean,
+      twoWay: true,
+      required: true
     },
     itemPartial: String,
     pos: String,
@@ -174,14 +175,16 @@ export default {
       if (this.$els.element && this.$els.container && this.forElement_) {
         let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM + ':not([disabled])')
 
-        if (items && items.length > 0 &&
-            this.$els.container.classList.contains(cssClasses.IS_VISIBLE)) {
-          if (evt.keyCode === this.Keycodes_.UP_ARROW) {
+        if (items && items.length > 0 && this.visible) {
+          if (evt.keyCode === keycodes.UP_ARROW) {
             evt.preventDefault()
             items[items.length - 1].focus()
-          } else if (evt.keyCode === this.Keycodes_.DOWN_ARROW) {
+          } else if (evt.keyCode === keycodes.DOWN_ARROW) {
             evt.preventDefault()
             items[0].focus()
+          } else if (evt.keyCode === keycodes.ESCAPE) {
+            evt.preventDefault()
+            this.show = false
           }
         }
       }
@@ -193,32 +196,37 @@ export default {
      * @param {Event} evt The event that fired.
      * @private
      */
-    handleItemKeyboardEvent (evt) {
+    handleItemKeyboardEvent_ (evt) {
       if (this.$els.element && this.$els.container) {
         let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM +
           ':not([disabled])')
 
-        if (items && items.length > 0 &&
-            this.$els.container.classList.contains(cssClasses.IS_VISIBLE)) {
+        if (items && items.length > 0 && this.visible) {
           let currentIndex = Array.prototype.slice.call(items).indexOf(evt.target)
 
-          if (evt.keyCode === this.Keycodes_.UP_ARROW) {
+          if (evt.keyCode === keycodes.UP_ARROW) {
             evt.preventDefault()
+            evt.stopPropagation()
+
             if (currentIndex > 0) {
               items[currentIndex - 1].focus()
             } else {
               items[items.length - 1].focus()
             }
-          } else if (evt.keyCode === this.Keycodes_.DOWN_ARROW) {
+          } else if (evt.keyCode === keycodes.DOWN_ARROW) {
             evt.preventDefault()
+            evt.stopPropagation()
+
             if (items.length > currentIndex + 1) {
               items[currentIndex + 1].focus()
             } else {
               items[0].focus()
             }
-          } else if (evt.keyCode === this.Keycodes_.SPACE ||
-                evt.keyCode === this.Keycodes_.ENTER) {
+          } else if (evt.keyCode === keycodes.SPACE ||
+                evt.keyCode === keycodes.ENTER) {
             evt.preventDefault()
+            evt.stopPropagation()
+
             // Send mousedown and mouseup to trigger ripple.
             let e = new MouseEvent('mousedown')
             evt.target.dispatchEvent(e)
@@ -226,9 +234,10 @@ export default {
             evt.target.dispatchEvent(e)
             // Send click.
             evt.target.click()
-          } else if (evt.keyCode === this.Keycodes_.ESCAPE) {
+          } else if (evt.keyCode === keycodes.ESCAPE) {
             evt.preventDefault()
-            this.hide()
+            evt.stopPropagation()
+            this.show = false
           }
         }
       }
@@ -240,14 +249,14 @@ export default {
      * @param {Event} evt The event that fired.
      * @private
      */
-    handleItemClick (evt) {
+    handleItemClick_ (evt) {
       if (evt.target.hasAttribute('disabled')) {
         evt.stopPropagation()
       } else {
         // Wait some time before closing menu, so the user can see the ripple.
         this.closing_ = true
         window.setTimeout(function (evt) {
-          this.hide()
+          this.show = false
           this.closing_ = false
         }.bind(this), /** @type {number} */ (constants.CLOSE_TIMEOUT))
       }
@@ -353,7 +362,6 @@ export default {
      * @public
      */
     show (evt) {
-      console.log('show')
       // let height = this.$els.element.getBoundingClientRect().height
       // let width = this.$els.element.getBoundingClientRect().width
       //
@@ -401,59 +409,12 @@ export default {
         // Also check if the clicked element is a menu item
         // if so, do nothing.
         if (e !== evt && !this.closing_ && e.target.parentNode !== this.$els.element) {
-          console.log('from document')
           document.removeEventListener('click', callback)
           this.hide()
         }
       }
       document.addEventListener('click', callback)
-    },
-
-    /**
-     * Hides the menu.
-     *
-     * @public
-     */
-    hide () {
-      console.log('hide')
-      // if (this.$els.element && this.$els.container && this.$els.outline) {
-      //   let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM)
-      //
-      //   // Remove all transition delays; menu items fade out concurrently.
-      //   for (let i = 0; i < items.length; i++) {
-      //     items[i].style.removeProperty('transition-delay')
-      //   }
-      //
-      //   // Measure the inner element.
-      //   let rect = this.$els.element.getBoundingClientRect()
-      //   let height = rect.height
-      //   let width = rect.width
-      //
-      //   // Turn on animation, and apply the final clip. Also make invisible.
-      //   // This triggers the transitions.
-      //   // this.$els.element.classList.add(cssClasses.IS_ANIMATING)
-      //   this.animating = true
-      //   this.applyClip_(height, width)
-      //   this.visible = false
-      //   // this.$els.container.classList.remove(cssClasses.IS_VISIBLE)
-      //
-      //   // Clean up after the animation is complete.
-      //   this.addAnimationEndListener_()
-      // }
     }
-
-    /**
-     * Displays or hides the menu, depending on current state.
-     *
-     * @public
-     */
-    // toggle (evt) {
-    //   if (!this.visible) {
-    //     this.show(evt)
-    //   } else {
-    //     this.hide()
-    //   }
-    // }
   },
 
   ready () {
@@ -462,11 +423,15 @@ export default {
       let forEl = document.getElementById(this.for)
       if (forEl) {
         this.forElement_ = forEl
-        // forEl.addEventListener('click', this.handleForClick_)
-        // forEl.addEventListener('keydown', this.handleForKeyboardEvent_)
       }
     }
 
   }
 }
 </script>
+
+<style>
+.mdl-menu:focus {
+  outline: none;
+}
+</style>

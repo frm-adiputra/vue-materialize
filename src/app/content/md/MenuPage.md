@@ -7,7 +7,9 @@ Lists of clickable actions.
     <i class="material-icons">more_vert</i>
   </md-button>
 
-  <md-menu v-show="mymenuVisible" :menu.once="mymenu" for="demo-menu-lower-left" ripple item-partial="simple-menu-item">
+  <div>{{mymenuVisible}}</div>
+
+  <md-menu :menu.once="mymenu" :show.sync="mymenuVisible" for="demo-menu-lower-left" ripple item-partial="simple-menu-item">
   </md-menu>
 </div>
 

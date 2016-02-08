@@ -1,10 +1,9 @@
 <template>
   <div
-    v-show="show"
+    v-if="show"
     v-el:container
     transition="menu"
     class="mdl-menu__container is-upgraded"
-    :class="{'is-visible': visible}"
     :style="{width: width + 'px', height: height + 'px', left: left, right: right, bottom: bottom, top: top}">
     <div
       v-el:outline
@@ -17,7 +16,7 @@
       class="mdl-menu mdl-js-menu"
       tabindex="-1"
       v-on:keydown="handleForKeyboardEvent_"
-      :class="{'mdl-js-ripple-effect': ripple, 'mdl-js-ripple-effect--ignore-events': ripple, 'mdl-menu--bottom-left': bottomLeft, 'mdl-menu--bottom-right': bottomRight, 'mdl-menu--top-right': topRight, 'mdl-menu--top-left': topLeft, 'mdl-menu--unaligned': unaligned, 'is-animating': animating}"
+      :class="{'mdl-js-ripple-effect': ripple, 'mdl-js-ripple-effect--ignore-events': ripple, 'mdl-menu--bottom-left': bottomLeft, 'mdl-menu--bottom-right': bottomRight, 'mdl-menu--top-right': topRight, 'mdl-menu--top-left': topLeft, 'mdl-menu--unaligned': unaligned}"
       :style="{clip: clip}">
 
       <md-menu-item v-for="item in menu"
@@ -65,28 +64,34 @@ export default {
 
   transitions: {
     'menu': {
+      css: false,
       beforeEnter () {
         this.adjustPosition_()
       },
       enter (el, done) {
         let removeAnimationEndListener = (evt) => {
-          this.$el.removeEventListener('transitionend', removeAnimationEndListener)
-          this.$el.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
-          this.animating = false
+          this.$els.outline.removeEventListener('transitionend', removeAnimationEndListener)
+          this.$els.outline.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
+
+          this.$els.container.classList.remove('is-animating')
+          this.$els.element.classList.remove('is-animating')
+
           this.$els.element.focus()
           done()
         }
 
-        this.$el.addEventListener('transitionend', removeAnimationEndListener)
-        this.$el.addEventListener('webkitTransitionEnd', removeAnimationEndListener)
+        this.$els.outline.addEventListener('transitionend', removeAnimationEndListener)
+        this.$els.outline.addEventListener('webkitTransitionEnd', removeAnimationEndListener)
 
         this.adjustSize_()
         this.applyItemDelay_()
 
-        this.animating = true
-        this.$els.outline.style.transform = ''
+        this.$els.container.classList.add('is-animating')
+        this.$els.element.classList.add('is-animating')
+
         this.clip = 'rect(0 ' + this.width + 'px ' + this.height + 'px 0)'
-        this.visible = true
+
+        this.$els.container.classList.add('is-visible')
       },
       enterCancelled (el) {
 
@@ -99,20 +104,25 @@ export default {
         this.adjustSize_()
       },
       leave (el, done) {
-        this.animating = true
-        this.$els.outline.style.transform = 'scale(0)'
+        this.$els.container.classList.remove('is-visible')
+
+        this.$els.container.classList.add('is-animating')
+        this.$els.element.classList.add('is-animating')
+
         this.applyClip_()
 
         let removeAnimationEndListener = (evt) => {
-          this.$el.removeEventListener('transitionend', removeAnimationEndListener)
-          this.$el.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
-          this.animating = false
-          this.visible = false
+          this.$els.outline.removeEventListener('transitionend', removeAnimationEndListener)
+          this.$els.outline.removeEventListener('webkitTransitionEnd', removeAnimationEndListener)
+
+          this.$els.container.classList.remove('is-animating')
+          this.$els.element.classList.remove('is-animating')
+
           done()
         }
 
-        this.$el.addEventListener('transitionend', removeAnimationEndListener)
-        this.$el.addEventListener('webkitTransitionEnd', removeAnimationEndListener)
+        this.$els.outline.addEventListener('transitionend', removeAnimationEndListener)
+        this.$els.outline.addEventListener('webkitTransitionEnd', removeAnimationEndListener)
       },
       leaveCancelled (el) {
 
@@ -141,8 +151,6 @@ export default {
 
   data () {
     return {
-      visible: false,
-      animating: false,
       width: null,
       height: null,
       left: null,
@@ -182,7 +190,7 @@ export default {
       if (this.$els.element && this.$els.container && this.forElement_) {
         let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM + ':not([disabled])')
 
-        if (items && items.length > 0 && this.visible) {
+        if (items && items.length > 0 && this.show) {
           if (evt.keyCode === keycodes.UP_ARROW) {
             evt.preventDefault()
             items[items.length - 1].focus()
@@ -208,7 +216,7 @@ export default {
         let items = this.$els.element.querySelectorAll('.' + cssClasses.ITEM +
           ':not([disabled])')
 
-        if (items && items.length > 0 && this.visible) {
+        if (items && items.length > 0 && this.show) {
           let currentIndex = Array.prototype.slice.call(items).indexOf(evt.target)
 
           if (evt.keyCode === keycodes.UP_ARROW) {

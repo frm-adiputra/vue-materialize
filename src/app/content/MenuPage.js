@@ -20,12 +20,24 @@ Vue.component('menu-page', function (resolve, reject) {
             {title: 'Copy'},
             {title: 'Paste'}
           ],
-          mymenuVisible: false
+          menuTopLeft: false,
+          menuTopRight: false,
+          menuBottomLeft: false,
+          menuBottomRight: false
         }
       },
       methods: {
-        toggleMenu () {
-          this.mymenuVisible = !this.mymenuVisible
+        toggleMenuTopLeft () {
+          this.menuTopLeft = !this.menuTopLeft
+        },
+        toggleMenuTopRight () {
+          this.menuTopRight = !this.menuTopRight
+        },
+        toggleMenuBottomLeft () {
+          this.menuBottomLeft = !this.menuBottomLeft
+        },
+        toggleMenuBottomRight () {
+          this.menuBottomRight = !this.menuBottomRight
         }
       }
     })

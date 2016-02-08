@@ -91,6 +91,9 @@ export default {
       enterCancelled (el) {
 
       },
+      afterEnter (el) {
+        this.addExternalClickHandler_()
+      },
       beforeLeave () {
         this.removeItemDelay_()
         this.adjustSize_()
@@ -113,12 +116,16 @@ export default {
       },
       leaveCancelled (el) {
 
+      },
+      afterLeave (el) {
+        this.removeExternalClickHandler_()
       }
     }
   },
 
   props: {
     ripple: Boolean,
+
     menu: {
       type: Array
     },
@@ -256,8 +263,8 @@ export default {
         // Wait some time before closing menu, so the user can see the ripple.
         this.closing_ = true
         window.setTimeout(function (evt) {
-          this.show = false
           this.closing_ = false
+          this.show = false
         }.bind(this), /** @type {number} */ (constants.CLOSE_TIMEOUT))
       }
     },
@@ -356,64 +363,29 @@ export default {
       }
     },
 
+    addExternalClickHandler_ () {
+      document.addEventListener('click', this.externalClickHandler_)
+    },
+
+    removeExternalClickHandler_ () {
+      document.removeEventListener('click', this.externalClickHandler_)
+    },
+
     /**
-     * Displays the menu.
+     * Click listener to the document, to close the menu.
      *
      * @public
      */
-    show (evt) {
-      // let height = this.$els.element.getBoundingClientRect().height
-      // let width = this.$els.element.getBoundingClientRect().width
-      //
-      // // Apply the inner element's size to the container and outline.
-      // this.width = width + 'px'
-      // this.height = height + 'px'
-
-      // let transitionDuration = constants.TRANSITION_DURATION_SECONDS *
-      //     constants.TRANSITION_DURATION_FRACTION
-      //
-      // // Calculate transition delays for individual menu items, so that they fade
-      // // in one at a time.
-      // let items = this.$refs.items
-      // for (let i = 0; i < items.length; i++) {
-      //   let itemDelay = null
-      //   if (this.topLeft || this.topRight) {
-      //     itemDelay = ((height - items[i].$el.offsetTop - items[i].$el.offsetHeight) /
-      //         height * transitionDuration) + 's'
-      //   } else {
-      //     itemDelay = (items[i].$el.offsetTop / height * transitionDuration) + 's'
-      //   }
-      //   items[i].$el.style.transitionDelay = itemDelay
-      // }
-
-      // // Apply the initial clip to the text before we start animating.
-      // this.applyClip_(height, width)
-      //
-      // // Wait for the next frame, turn on animation, and apply the final clip.
-      // // Also make it visible. This triggers the transitions.
-      // window.requestAnimationFrame(() => {
-      //   this.animating = true
-      //   this.clip = 'rect(0 ' + width + 'px ' + height + 'px 0)'
-      //   this.visible = true
-      // })
-
-      // // Clean up after the animation is complete.
-      // this.addAnimationEndListener_()
-
-      // Add a click listener to the document, to close the menu.
-      let callback = (e) => {
-        // Check to see if the document is processing the same event that
-        // displayed the menu in the first place. If so, do nothing.
-        // Also check to see if the menu is in the process of closing itself, and
-        // do nothing in that case.
-        // Also check if the clicked element is a menu item
-        // if so, do nothing.
-        if (e !== evt && !this.closing_ && e.target.parentNode !== this.$els.element) {
-          document.removeEventListener('click', callback)
-          this.hide()
-        }
+    externalClickHandler_ (e) {
+      // Check to see if the document is processing the same event that
+      // displayed the menu in the first place. If so, do nothing.
+      // Also check to see if the menu is in the process of closing itself, and
+      // do nothing in that case.
+      // Also check if the clicked element is a menu item
+      // if so, do nothing.
+      if (!this.closing_) {
+        this.show = false
       }
-      document.addEventListener('click', callback)
     }
   },
 
@@ -425,7 +397,6 @@ export default {
         this.forElement_ = forEl
       }
     }
-
   }
 }
 </script>

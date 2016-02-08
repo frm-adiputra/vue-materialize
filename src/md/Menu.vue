@@ -271,27 +271,25 @@ export default {
 
     adjustPosition_ () {
       if (this.$els.element && this.forElement_) {
-        let rect = this.forElement_.getBoundingClientRect()
-        let forRect = this.forElement_.parentElement.getBoundingClientRect()
 
         if (this.unaligned) {
           // Do not position the menu automatically. Requires the developer to
           // manually specify position.
         } else if (this.bottomRight) {
           this.left = null
-          this.right = (forRect.right - rect.right) + 'px'
+          this.right = (this.forElement_.offsetParent.offsetWidth - this.forElement_.offsetLeft - this.forElement_.offsetWidth) + 'px'
           this.top = this.forElement_.offsetTop + this.forElement_.offsetHeight + 'px'
           this.bottom = null
         } else if (this.topLeft) {
           this.left = this.forElement_.offsetLeft + 'px'
           this.right = null
           this.top = null
-          this.bottom = (forRect.bottom - rect.top) + 'px'
+          this.bottom = (this.forElement_.offsetParent.offsetHeight - this.forElement_.offsetTop) + 'px'
         } else if (this.topRight) {
           this.left = null
-          this.right = (forRect.right - rect.right) + 'px'
+          this.right = (this.forElement_.offsetParent.offsetWidth - this.forElement_.offsetLeft - this.forElement_.offsetWidth) + 'px'
           this.top = null
-          this.bottom = (forRect.bottom - rect.top) + 'px'
+          this.bottom = (this.forElement_.offsetParent.offsetHeight - this.forElement_.offsetTop) + 'px'
         } else { // this.bottomLeft
           this.left = this.forElement_.offsetLeft + 'px'
           this.right = null

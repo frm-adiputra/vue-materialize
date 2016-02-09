@@ -18,7 +18,7 @@ Lists of clickable actions.
       Bottom Right
     </md-button>
 
-    <md-menu :menu.once="mymenu" :show.sync="menuBottomRight" for="demo-menu-bottom-right" ripple item-partial="simple-menu-item" pos="bottom-right">
+    <md-menu :menu.once="mymenu" :show.sync="menuBottomRight" for="demo-menu-bottom-right" ripple item-partial="simple-menu-item" pos="bottom-right" use-if>
     </md-menu>
   </div>
 </div>
@@ -133,3 +133,13 @@ Lists of clickable actions.
   })
 </script>
 ```
+
+## Configuration props
+
+- `ripple`: Applies ripple click effect
+- `useIf`: Use `v-if` instead of `v-show` for displaying the menu
+- `menu`: Array of menu items data
+- `show`: Bind to the variable that controls menu popup
+- `itemPartial`: Partial to be used for rendering menu item
+- `pos`: Anchor position of menu popup
+- `for`: Element's id used for anchoring popup

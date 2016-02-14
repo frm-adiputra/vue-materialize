@@ -17,6 +17,7 @@
       </div>
     </header>
     <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+      <a class="mdl-navigation__link" v-link="{path: '/paper-ripple'}">paper-ripple</a>
       <a class="mdl-navigation__link" v-link="{path: '/home'}">Home</a>
       <a class="mdl-navigation__link" v-link="{path: '/badge'}">Badges</a>
       <a class="mdl-navigation__link" v-link="{path: '/button'}">Buttons</a>

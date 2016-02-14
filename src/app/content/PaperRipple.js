@@ -17,10 +17,12 @@ Vue.component('paper-ripple-page', function (resolve, reject) {
       components: {
         PaperRipple
       },
-      data () {
-        return {
-          progress1: 40,
-          buffer1: 80
+      methods: {
+        downAction (event) {
+          this.$refs.ripple.downAction()
+        },
+        upAction (event) {
+          this.$refs.ripple.upAction()
         }
       }
     })

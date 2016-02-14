@@ -1,6 +1,6 @@
 <template>
   <div class="paper-ripple"
-    :class="{'paper-ripple--animating': animating}"
+    :class="{'paper-ripple--circle': circle, 'paper-ripple--animating': animating}"
     @keydown.enter="_onEnterKeydown"
     @keydown.space="_onSpaceKeydown"
     @keyup.space="_onSpaceKeyup">
@@ -324,6 +324,13 @@ export default {
      * If true, ripples will center inside its container.
      */
     center: {
+      type: Boolean
+    },
+
+    /**
+     * If true, make the rippling effect within a circle.
+     */
+    circle: {
       type: Boolean
     },
 

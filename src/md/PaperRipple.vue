@@ -7,7 +7,8 @@
 
     <div v-el:background class="paper-ripple__background"></div>
     <div v-el:waves class="paper-ripple__waves">
-      <paper-ripple-wave v-ref:ripples v-for="index in rippleCount"
+      <paper-ripple-wave v-ref:ripples v-for="item in rippleIds"
+        :wave-id.once="item"
         :center.once="center"
         :recenters.once="recenters"
         :initial-opacity.once="initialOpacity"
@@ -18,6 +19,8 @@
 </template>
 
 <script>
+/** @module vue-materialized/src/PaperRipple */
+
 import Vue from 'vue'
 
 let RIPPLE_MAX_RADIUS = 300
@@ -77,6 +80,10 @@ let PaperRippleWave = Vue.extend({
     },
     opacityDecayVelocity: {
       type: Number
+    },
+    waveId: {
+      type: Object,
+      required: true
     }
   },
 
@@ -301,49 +308,70 @@ let PaperRippleWave = Vue.extend({
 })
 
 export default {
+  /**
+   * Get the red, green, and blue values of a color.
+   * @function
+   * @param {string} color - A color, in hexidecimal format.
+   * @returns {Array.} An array of the red, green, and blue values,
+   * each ranging from 0 to 255.
+   */
   components: {
     PaperRippleWave
   },
 
   props: {
-    // If true, ripples will center inside its container.
+    /**
+     * If true, ripples will center inside its container.
+     */
     center: {
       type: Boolean
     },
 
-    // If true, the ripple will remain in the "down" state until holdDown is
-    // set to false again.
+    /**
+     * If true, the ripple will remain in the "down" state until holdDown is
+     * set to false again.
+     */
     holdDown: {
       type: Boolean
     },
 
-    // The initial opacity set on the wave.
+    /**
+     * The initial opacity set on the wave.
+     */
     initialOpacity: {
       type: Number,
       default: 0.25
     },
 
-    // If true, the ripple will not generate a ripple effect via pointer
-    // interaction. Calling ripple's imperative api like simulatedRipple will
-    // still generate the ripple effect.
+    /**
+     * If true, the ripple will not generate a ripple effect via pointer
+     * interaction. Calling ripple's imperative api like simulatedRipple will
+     * still generate the ripple effect.
+     */
     noink: {
       type: Boolean
     },
 
-    // How fast (opacity per second) the wave fades out.
+    /**
+     * How fast (opacity per second) the wave fades out.
+     */
     opacityDecayVelocity: {
       type: Number,
       default: 0.8
     },
 
-    // If true, ripples will exhibit a gravitational pull towards the center of
-    // their container as they fade away.
+    /**
+     * If true, ripples will exhibit a gravitational pull towards the center of
+     * their container as they fade away.
+     */
     recenters: {
       type: Boolean
     },
 
-    // If true, this property will cause the implementing element to
-    // automatically stop propagation on any handled KeyboardEvents.
+    /**
+     * If true, this property will cause the implementing element to
+     * automatically stop propagation on any handled KeyboardEvents.
+     */
     stopKeyboardEventPropagation: {
       type: Boolean
     }
@@ -351,11 +379,15 @@ export default {
 
   data () {
     return {
-      // True when there are visible ripples animating within the element.
+      /**
+       * True when there are visible ripples animating within the element.
+       */
       animating: false,
 
-      // Number of visual ripples.
-      rippleCount: 0,
+      /**
+       * Number of visual ripples.
+       */
+      rippleIds: [],
 
       _animating: false
     }
@@ -374,10 +406,18 @@ export default {
   },
 
   methods: {
+    nextId_ () {
+      let next = this.lastId_++
+      if (next > 99999) {
+        this.lastId_ = 0
+      }
+      return next
+    },
+
     simulatedRipple () {
       this.downAction(null)
 
-      // Please see polymer/polymer#1305
+      // // Please see polymer/polymer#1305
       // this.async(function () {
       //   this.upAction()
       // }, 1)
@@ -448,50 +488,50 @@ export default {
       this.animate()
     },
 
+    /**
+     * Event when the ripple animation completed.
+     *
+     * @event PaperRipple#transitionend
+     */
+
+    /**
+     * Executed on ripple animation completed.
+     *
+     * @fires PaperRipple#transitionend
+     */
     onAnimationComplete () {
       this._animating = false
       this.$els.background.style.backgroundColor = null
-      this.fire('transitionend')
+      this.$emit('transitionend')
     },
 
     addRipple () {
-      // let ripple = new Ripple(this)
-
-      // Polymer.dom(this.$.waves).appendChild(ripple.waveContainer)
-      // this.$els.background.style.backgroundColor = ripple.color
-      // this.$refs.ripples.push(ripple)
-      this.rippleCount++
+      let waveId = {_uid: this.nextId_()}
+      this.rippleIds.push(waveId)
 
       this.animating = true
 
-      // return ripple
+      return waveId
     },
 
-    removeRipple (ripple) {
-      if (this.rippleCount === 0) {
+    removeRipple (waveId) {
+      if (!this.rippleIds.length) {
         return
       }
 
-      this.rippleCount--
+      let rippleIndex = this.rippleIds.indexOf(waveId)
+
+      if (rippleIndex < 0) {
+        return
+      }
+
+      this.rippleIds.splice(rippleIndex, 1)
+
       this.$nextTick(() => {
-        if (this.rippleCount === 0) {
+        if (!this.rippleIds.length) {
           this.animating = false
         }
       })
-
-      // let rippleIndex = this.$refs.ripples.indexOf(ripple)
-      //
-      // if (rippleIndex < 0) {
-      //   return
-      // }
-      //
-      // this.$refs.ripples.splice(rippleIndex, 1)
-      //
-      // ripple.remove()
-      //
-      // if (!this.$refs.ripples.length) {
-      //   this.animating = false
-      // }
     },
 
     animate () {
@@ -508,7 +548,7 @@ export default {
         this.$els.background.style.opacity = ripple.outerOpacity
 
         if (ripple.isOpacityFullyDecayed && !ripple.isRestingAtMaxRadius) {
-          this.removeRipple(ripple)
+          this.removeRipple(ripple.waveId)
         }
       }
 
@@ -548,6 +588,7 @@ export default {
 
   created () {
     this._animating = false
+    this.lastId_ = 0
 
     Object.defineProperty(this, 'target', { get: function () {
       return this.$el.parentNode

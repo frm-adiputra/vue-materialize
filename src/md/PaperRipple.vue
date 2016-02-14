@@ -424,10 +424,7 @@ export default {
     simulatedRipple () {
       this.downAction(null)
 
-      // // Please see polymer/polymer#1305
-      // this.async(function () {
-      //   this.upAction()
-      // }, 1)
+      // Please see polymer/polymer#1305
       this.$nextTick(function () {
         this.upAction()
       })

@@ -14,6 +14,7 @@ import './app/content/ButtonPage'
 import './app/content/ProgressPage'
 import './app/content/CheckboxPage'
 import './app/content/MenuPage'
+import './app/content/SliderPage'
 
 /* eslint-disable no-new */
 var AppWrapper = Vue.extend({
@@ -37,8 +38,11 @@ router.map({
   '/progress': {
     component: Vue.component('progress-page')
   },
-  'menu': {
+  '/menu': {
     component: Vue.component('menu-page')
+  },
+  '/slider': {
+    component: Vue.component('slider-page')
   }
 })
 

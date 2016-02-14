@@ -27,7 +27,7 @@
       <a class="mdl-navigation__link" v-link="{path: '/loading'}">** Loading</a>
       <a class="mdl-navigation__link" v-link="{path: '/progress'}">Progress bar</a>
       <a class="mdl-navigation__link" v-link="{path: '/menu'}">Menus</a>
-      <a class="mdl-navigation__link" v-link="{path: '/slider'}">** Sliders</a>
+      <a class="mdl-navigation__link" v-link="{path: '/slider'}">Sliders</a>
       <a class="mdl-navigation__link" v-link="{path: '/snackbar'}">** Snackbar</a>
       <a class="mdl-navigation__link" v-link="{path: '/toggle'}">** Toggles</a>
       <a class="mdl-navigation__link" v-link="{path: '/checkbox'}">Checkboxes</a>

@@ -14,6 +14,7 @@ import './app/content/ButtonPage'
 import './app/content/ProgressPage'
 import './app/content/CheckboxPage'
 import './app/content/MenuPage'
+import './app/content/PaperRipple'
 
 /* eslint-disable no-new */
 var AppWrapper = Vue.extend({
@@ -22,6 +23,9 @@ var AppWrapper = Vue.extend({
 
 var router = new VueRouter()
 router.map({
+  '/paper-ripple': {
+    component: Vue.component('paper-ripple-page')
+  },
   '/home': {
     component: Home
   },
@@ -37,7 +41,7 @@ router.map({
   '/progress': {
     component: Vue.component('progress-page')
   },
-  'menu': {
+  '/menu': {
     component: Vue.component('menu-page')
   }
 })
